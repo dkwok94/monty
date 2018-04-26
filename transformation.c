@@ -24,6 +24,11 @@ void push(stack_t **stack, unsigned int line_number)
 			printf("L%u: usage: push integer\n", line_number);
 			exit(EXIT_FAILURE);
 		}
+		if (line[i] == '-')
+		{
+			value[j] = line[i];
+			j++;
+		}
 		i++;
 	}
 	while (line[i] != ' ' && line[i] != '\0')
@@ -44,7 +49,10 @@ void push(stack_t **stack, unsigned int line_number)
 	if (*stack == NULL)
 		node->next = NULL;
 	else
+	{
 		node->next = *stack;
+		(*stack)->prev = node;
+	}
 	*stack = node;
 	free(value);
 }
