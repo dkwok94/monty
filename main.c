@@ -1,4 +1,6 @@
+#include "global.h"
 #include "monty.h"
+char *line;
 /**
  *main - entry point for interpretor
  *@ac: the number of command line arguments
@@ -8,73 +10,43 @@
  */
 int main(int ac, char **av)
 {
-	int fd, i = 0, j = 0, k = 0;
+	stack_t *stack = NULL;
+	int i = 0;
+	FILE *file;
 	unsigned int line_number = 0;
-	char *value, *opcode, *buffer;
-	ssize_t chars_read;
+	char *opcode;
+	ssize_t chars_read = 0;
+	size_t size;
 
 	if (ac != 2)
 	{
 		printf("USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-
-	fd = open(av[1], O_RDONLY);
-	if (fd == -1)
+	file = fopen(av[1], "r");
+	if (file == NULL)
 	{
 		printf("Error: Can't open file <file>\n");
 		exit(EXIT_FAILURE);
 	}
-
-//	while (fgetc(fd) != EOF)
-//		letters++;
-
-	buffer = malloc(sizeof(char) * 1024);
-	if (buffer == NULL)
+	while (chars_read != -1)
 	{
-		printf("Error: malloc failed\n");
-		exit(EXIT_FAILURE);
+		line = NULL;
+		size = 0;
+		i = 0;
+		chars_read = getline(&line, &size, file);
+		while (line[i] != '\n' && line[i] != '\0')
+			i++;
+		line[i] = '\0';
+		if (line[i = 0] == '\0')
+			break;
+		line_number++;
+		opcode = getopcode();
+		opcodecompare(&stack, line_number, opcode);
+		free(opcode);
 	}
-	opcode = malloc(sizeof(char) * 10);
-	value = malloc(sizeof(char) * 12);
-
-	chars_read = read(fd, buffer, 1024);
-	if (chars_read == -1)
-	{
-		printf("Error: Can't open file <file>\n");
-		exit(EXIT_FAILURE);
-	}
-
-	while (buffer[i] != '\0')
-	{
-		if (buffer[i] != ' ' && buffer[i] != '\n')
-		{
-			opcode[j] = buffer[i];
-			j++;
-		}
-		else
-		{
-			opcode[++j] = '\0';
-			printf("Opcode: %s\n", opcode);
-			while (buffer[i] == ' ')
-				i++;
-			while (buffer[i] != '\n')
-			{
-				value[k] = buffer[i];
-				i++;
-				k++;
-				printf("Iteration %d\n", k);
-			}
-			if (buffer[i + 1] != '\0')
-				value[++k] = '\0';
-			printf("Value: %s\n", value);
-			line_number++;
-			opcodecompare(line_number, opcode);
-			j = 0;
-			k = 0;
-		}
-		i++;
-	}
-	printf("Buffer: %s", buffer);
+	fclose(file);
+	free(line);
+	free_stack(stack);
 	return (0);
 }
