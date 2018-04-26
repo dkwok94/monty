@@ -2,7 +2,9 @@
 #include "monty.h"
 /**
  *opcodecompare - compares opcodes and runs associated functions
+ *@stack: pointer to the top of the stack
  *@line_number: line number of command
+ *@opcode: the opcode for Monty interpretor
  *
  *Return: void
  */
@@ -32,5 +34,5 @@ void opcodecompare(stack_t **stack, unsigned int line_number, char *opcode)
 	}
 
 	printf("L%u: unknown instruction %s\n", line_number, line);
-	exit (EXIT_FAILURE);
+	exit(EXIT_FAILURE);
 }

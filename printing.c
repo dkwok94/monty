@@ -8,16 +8,16 @@
  */
 void pall(stack_t **stack, unsigned int line_number)
 {
-	(void) line_number;
-	stack_t *iterator;
+	stack_t *itr;
 
-	iterator = *stack;
+	(void) line_number;
+	itr = *stack;
 	if (*stack == NULL)
 		return;
-	while (iterator != NULL)
+	while (itr != NULL)
 	{
-		printf("%d\n", iterator->n);
-		iterator = iterator->next;
+		printf("%d\n", itr->n);
+		itr = itr->next;
 	}
 }
 /**

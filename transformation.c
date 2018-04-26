@@ -10,7 +10,7 @@
 void push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *node;
-       	char *value;
+	char *value;
 	int i = 0, j = 0;
 
 	value = malloc(sizeof(char) * 12);
@@ -22,7 +22,7 @@ void push(stack_t **stack, unsigned int line_number)
 		if (line[i] == '\0')
 		{
 			printf("L%u: usage: push integer\n", line_number);
-			exit (EXIT_FAILURE);
+			exit(EXIT_FAILURE);
 		}
 		i++;
 	}
@@ -37,7 +37,7 @@ void push(stack_t **stack, unsigned int line_number)
 	if (node == NULL)
 	{
 		printf("Error: malloc failed\n");
-		exit (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 	node->n = atoi(value);
 	node->prev = NULL;
@@ -58,16 +58,16 @@ void push(stack_t **stack, unsigned int line_number)
  */
 void pop(stack_t **stack, unsigned int line_number)
 {
-        stack_t *temp = *stack;
+	stack_t *temp = *stack;
 
-        if (*stack == NULL)
-        {
-                printf("L%u: can't pop an empty stack\n", line_number);
-                exit(EXIT_FAILURE);
-        }
-        *stack = (*stack)->next;
-        (*stack)->prev = NULL;
-        free(temp);
+	if (*stack == NULL)
+	{
+		printf("L%u: can't pop an empty stack\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	*stack = (*stack)->next;
+	(*stack)->prev = NULL;
+	free(temp);
 }
 
 /**
@@ -79,22 +79,21 @@ void pop(stack_t **stack, unsigned int line_number)
  */
 void swap(stack_t **stack, unsigned int line_number)
 {
-        int temp;
-        int nodes = 0;
-        stack_t *iterator = *stack;
+	int temp;
+	int nodes = 0;
+	stack_t *iterator = *stack;
 
-        while (iterator != NULL)
-        {
-                nodes++;
-                iterator = iterator->next;
-        }
-        if (nodes < 2)
-        {
-                printf("L%u: can't swap, stack too short\n", line_number);
-                exit(EXIT_FAILURE);
-        }
-        temp = (*stack)->n;
-        (*stack)->n = (*stack)->next->n;
-        (*stack)->next->n = temp;
+	while (iterator != NULL)
+	{
+		nodes++;
+		iterator = iterator->next;
+	}
+	if (nodes < 2)
+	{
+		printf("L%u: can't swap, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	temp = (*stack)->n;
+	(*stack)->n = (*stack)->next->n;
+	(*stack)->next->n = temp;
 }
-
