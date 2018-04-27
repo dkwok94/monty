@@ -31,7 +31,8 @@ void push(stack_t **stack, unsigned int line_number)
 		}
 		i++;
 	}
-	while (line[i] != ' ' && line[i] != '\0')
+	while (line[i] != ' ' && line[i] != '\0' && line[i] >= '0'
+		&& line[i] <= '9')
 	{
 		value[j] = line[i];
 		i++;

@@ -36,12 +36,14 @@ int main(int ac, char **av)
 		size = 0;
 		i = 0;
 		chars_read = getline(&line, &size, file);
+		line_number++;
+		if (line[0] == '\n')
+			continue;
 		while (line[i] != '\n' && line[i] != '\0')
 			i++;
 		line[i] = '\0';
 		if (line[0] == '\0')
 			break;
-		line_number++;
 		opcode = getopcode();
 		opcodecompare(&stack, line_number, opcode);
 		free(opcode);
