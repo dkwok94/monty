@@ -2,11 +2,10 @@
 #include "global.h"
 /**
  *getopcode - obtains the opcode of a Monty file from a global buffer
- *@line: the line of the Monty file
  *
  *Return: pointer to a string containing the opcode
  */
-char *getopcode(char *line)
+char *getopcode(void)
 {
 	int i = 0, j = 0;
 	char *opcodebuffer;

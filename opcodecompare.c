@@ -25,7 +25,7 @@ void opcodecompare(stack_t **stack, unsigned int line_number, char *opcode)
 
 	while (ops[i].opcode != NULL)
 	{
-		if (strcmp(opcode, ops[i].opcode) == 0)
+		if (_strcmp(opcode, ops[i].opcode) == 0)
 		{
 			ops[i].f(stack, line_number);
 			return;
@@ -33,6 +33,6 @@ void opcodecompare(stack_t **stack, unsigned int line_number, char *opcode)
 		i++;
 	}
 
-	printf("L%u: unknown instruction <file>\n", line_number);
+	printf("L%u: unknown instruction %s\n", line_number, line);
 	exit(EXIT_FAILURE);
 }
