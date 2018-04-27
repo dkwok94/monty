@@ -27,7 +27,7 @@ int main(int ac, char **av)
 	file = fopen(av[1], "r");
 	if (file == NULL)
 	{
-		printf("Error: Can't open file <file>\n");
+		printf("Error: Can't open file %s\n", av[1]);
 		exit(EXIT_FAILURE);
 	}
 	while (chars_read != -1)

@@ -22,6 +22,7 @@ void push(stack_t **stack, unsigned int line_number)
 		if (line[i] == '\0')
 		{
 			printf("L%u: usage: push integer\n", line_number);
+			free_stack(*stack);
 			exit(EXIT_FAILURE);
 		}
 		if (line[i] == '-')
@@ -31,18 +32,25 @@ void push(stack_t **stack, unsigned int line_number)
 		}
 		i++;
 	}
-	while (line[i] != ' ' && line[i] != '\0' && line[i] >= '0'
-		&& line[i] <= '9')
+	while (line[i] != ' ' && line[i] != '\0'
+	       && line[i] >= '0' && line[i] <= '9')
 	{
 		value[j] = line[i];
 		i++;
 		j++;
+	}
+	if (line[i] != ' ' && line[i] != '\0')
+	{
+		printf("L%u: usage: push integer\n", line_number);
+		free_stack(*stack);
+		exit(EXIT_FAILURE);
 	}
 	value[j] = '\0';
 	node = malloc(sizeof(stack_t));
 	if (node == NULL)
 	{
 		printf("Error: malloc failed\n");
+		free_stack(*stack);
 		exit(EXIT_FAILURE);
 	}
 	node->n = atoi(value);
