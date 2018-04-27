@@ -1,7 +1,7 @@
 #define _GNU_SOURCE
 #include "global.h"
 #include "monty.h"
-char *line;
+int value;
 /**
  *main - entry point for interpretor
  *@ac: the number of command line arguments
@@ -15,7 +15,7 @@ int main(int ac, char **av)
 	int i = 0, j = 0;
 	FILE *file;
 	unsigned int line_number = 0;
-	char *opcode;
+	char *opcode, *line;
 	ssize_t chars_read = 0;
 	size_t size;
 
@@ -27,7 +27,7 @@ int main(int ac, char **av)
 	file = fopen(av[1], "r");
 	if (file == NULL)
 	{
-		printf("Error: Can't open file <file>\n");
+		printf("Error: Can't open file %s\n", av[1]);
 		exit(EXIT_FAILURE);
 	}
 	while (chars_read != -1)
@@ -47,7 +47,9 @@ int main(int ac, char **av)
 		line[i] = '\0';
 		if (line[0] == '\0')
 			break;
-		opcode = getopcode();
+		opcode = getopcode(line);
+		if (_strcmp(opcode, "push") == 0)
+			value = getvalue(line);
 		opcodecompare(&stack, line_number, opcode);
 		free(opcode);
 	}

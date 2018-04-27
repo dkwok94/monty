@@ -33,6 +33,6 @@ void opcodecompare(stack_t **stack, unsigned int line_number, char *opcode)
 		i++;
 	}
 
-	printf("L%u: unknown instruction %s\n", line_number, line);
+	printf("L%u: unknown instruction <file>\n", line_number);
 	exit(EXIT_FAILURE);
 }

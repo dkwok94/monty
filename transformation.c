@@ -10,42 +10,15 @@
 void push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *node;
-	char *value;
-	int i = 0, j = 0;
 
-	value = malloc(sizeof(char) * 12);
-	if (value == NULL)
-		return;
-
-	while (line[i] < '0' || line[i] > '9')
-	{
-		if (line[i] == '\0')
-		{
-			printf("L%u: usage: push integer\n", line_number);
-			exit(EXIT_FAILURE);
-		}
-		if (line[i] == '-')
-		{
-			value[j] = line[i];
-			j++;
-		}
-		i++;
-	}
-	while (line[i] != ' ' && line[i] != '\0' && line[i] >= '0'
-		&& line[i] <= '9')
-	{
-		value[j] = line[i];
-		i++;
-		j++;
-	}
-	value[j] = '\0';
+	(void) line_number;
 	node = malloc(sizeof(stack_t));
 	if (node == NULL)
 	{
 		printf("Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-	node->n = atoi(value);
+	node->n = value;
 	node->prev = NULL;
 	if (*stack == NULL)
 		node->next = NULL;
@@ -55,7 +28,6 @@ void push(stack_t **stack, unsigned int line_number)
 		(*stack)->prev = node;
 	}
 	*stack = node;
-	free(value);
 }
 
 /**

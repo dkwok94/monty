@@ -47,6 +47,7 @@ void swap(stack_t **stack, unsigned int line_number);
 void add(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
 int _strcmp(char *s1, char *s2);
-char *getopcode(void);
+char *getopcode(char *line);
+int getvalue(char *line);
 void free_stack(stack_t *stack);
 #endif
