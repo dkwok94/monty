@@ -43,7 +43,6 @@ int main(int ac, char **av)
 			break;
 		line_number++;
 		opcode = getopcode();
-		printf("%s\n", opcode);
 		opcodecompare(&stack, line_number, opcode);
 		free(opcode);
 	}
