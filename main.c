@@ -12,7 +12,7 @@ char *line;
 int main(int ac, char **av)
 {
 	stack_t *stack = NULL;
-	int i = 0;
+	int i = 0, j = 0;
 	FILE *file;
 	unsigned int line_number = 0;
 	char *opcode;
@@ -35,9 +35,12 @@ int main(int ac, char **av)
 		line = NULL;
 		size = 0;
 		i = 0;
+		j = 0;
 		chars_read = getline(&line, &size, file);
 		line_number++;
-		if (line[0] == '\n')
+		while (line[j] == ' ')
+			j++;
+		if (line[j] == '\n')
 			continue;
 		while (line[i] != '\n' && line[i] != '\0')
 			i++;
