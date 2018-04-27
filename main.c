@@ -39,8 +39,7 @@ int main(int ac, char **av)
 		while (line[i] != '\n' && line[i] != '\0')
 			i++;
 		line[i] = '\0';
-		i = 0;
-		if (line[i] == '\0')
+		if (line[0] == '\0')
 			break;
 		line_number++;
 		opcode = getopcode();
