@@ -40,7 +40,7 @@ int main(int ac, char **av)
 		line_number++;
 		while (line[j] == ' ')
 			j++;
-		if (line[j] == '\n')
+		if (line[j] == '\n' || line[j] == '#')
 			continue;
 		while (line[i] != '\n' && line[i] != '\0')
 			i++;
