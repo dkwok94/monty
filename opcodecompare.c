@@ -25,7 +25,7 @@ void opcodecompare(stack_t **stack, unsigned int line_number, char *opcode)
 
 	while (ops[i].opcode != NULL)
 	{
-		if (_strcmp(opcode, ops[i].opcode) == 0)
+		if (strcmp(opcode, ops[i].opcode) == 0)
 		{
 			ops[i].f(stack, line_number);
 			return;

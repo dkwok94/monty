@@ -48,7 +48,7 @@ int main(int ac, char **av)
 		if (line[0] == '\0')
 			break;
 		opcode = getopcode(line);
-		if (_strcmp(opcode, "push") == 0)
+		if (strcmp(opcode, "push") == 0)
 			value = getvalue(line);
 		opcodecompare(&stack, line_number, opcode);
 		free(opcode);
