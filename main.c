@@ -50,6 +50,7 @@ int main(int ac, char **av)
 		opcode = getopcode();
 		opcodecompare(&stack, line_number, opcode);
 		free(opcode);
+		free(line);
 	}
 	fclose(file);
 	free(line);
